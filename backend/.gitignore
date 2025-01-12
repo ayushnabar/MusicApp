@@ -1,0 +1,39 @@
+# Node modules
+node_modules/
+node_modules/*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production build or compiled output
+dist/
+build/
+out/
+*.js.map
+*.d.ts
+
+# Environment variables
+.env
+.env.* 
+
+# TypeScript cache (optional)
+*.tsbuildinfo
+
+# Coverage directory for testing tools like Jest
+coverage/
+
+# Temporary folders
+tmp/
+temp/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional if you use an editor that generates local workspace settings
+.vscode/
+.idea/
