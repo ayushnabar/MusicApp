@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import connectDB from "./configs/db";
 
 const app = express();
 app.use(express.json()); // to parse JSON
@@ -12,5 +13,6 @@ app.get("/", (req, res) => {
 })
 
 app.listen(3000, () => {
+    connectDB();
     console.log("Server is running on http://localhost:3000");
 });
