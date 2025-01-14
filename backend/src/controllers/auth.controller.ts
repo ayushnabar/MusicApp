@@ -1,5 +1,7 @@
 import tryCatch from "../utils/tryCatch";
-import {z} from 'zod';
+import { CREATED } from "../constants/https";
+import { registerService } from "../services/auth.service";
+import { z } from 'zod';
 
 const registerSchema = z.object({
     email: z.string().email().min(8),
@@ -17,9 +19,12 @@ export const registerController = tryCatch(async (req, res) => {
         ...req.body,
         userAgent: req.headers["user-agent"]
     });
-
+    console.log(request)
     /*Calls appropriate service */
-    
+    const { user, refreshToken, accessToken } = await registerService(request);
     /*Return Response */
+    res.status(CREATED).json({
+        user
+    })
 
 })

@@ -7,7 +7,6 @@ interface UserDocument extends mongoose.Document {
     createdAt: Date;
     updatedAt: Date;
     compare: (password: string) => Promise<boolean>;
-
 }
 
 const userSchema = new mongoose.Schema<UserDocument>({
@@ -26,7 +25,7 @@ userSchema.pre("save", async function (next) { //Hooks to run before saving the 
     next();
 })
 
-userSchema.methods.compare = async function (password: string) { //instance method for comparing password
+userSchema.methods.compare = async function (password: string) { //instance method for comparing password against hashedpassword
     return await comparePassword(password, this.password);
 }
 
