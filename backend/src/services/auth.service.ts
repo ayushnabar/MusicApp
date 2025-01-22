@@ -4,9 +4,13 @@ import VerificationModel from "../models/verification.model";
 import SessionModel from "../models/session.model";
 import { tenMinutesFromNow } from "../utils/date";
 import jwt from "jsonwebtoken";
+import appAssert from '../utils/appAssert';
+import { CONFLICT } from '../constants/https';
+
 
 
 import tryCatch from "../utils/tryCatch";
+import { isNamedExportBindings } from 'typescript';
 
 type RegisterParams = {
     email: string;
@@ -17,9 +21,13 @@ type RegisterParams = {
 export const registerService = async (userData: RegisterParams) => {
     // Verify if user exists or not
     const existingUser = await UserModel.findOne({ email: userData.email });
-    if (existingUser) {
-        throw new Error("User already exists");
-    }
+    // if (existingUser) {
+    //     throw new Error("User already exists");
+    // }
+    appAssert(!existingUser, //Assertion only passes if existing user does not exist, if existingUser is truthy, it will assert an error
+        "User already exists",
+        CONFLICT);
+
     //Create new user
     const user = await UserModel.create({
         email: userData.email,

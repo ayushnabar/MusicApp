@@ -1,6 +1,7 @@
 import tryCatch from "../utils/tryCatch";
 import { CREATED } from "../constants/https";
 import { registerService } from "../services/auth.service";
+import { setAuthCookies } from "../utils/cookies";
 import { z } from 'zod';
 
 const registerSchema = z.object({
@@ -22,9 +23,8 @@ export const registerController = tryCatch(async (req, res) => {
     console.log(request)
     /*Calls appropriate service */
     const { user, refreshToken, accessToken } = await registerService(request);
-    /*Return Response */
-    res.status(CREATED).json({
-        user
-    })
 
+    /*Return Response */
+    setAuthCookies(res, accessToken, refreshToken).status(CREATED).json(user);
+ 
 })

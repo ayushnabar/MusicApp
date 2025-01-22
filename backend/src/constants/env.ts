@@ -10,3 +10,4 @@ export const MONGO_URI = getEnv('MONGO_URI');
 export const PORT = getEnv('PORT');
 export const JWT_SECRET = getEnv('JWT_SECRET');
 export const JWT_REFRESH_SECRET = getEnv('JWT_REFRESH_SECRET');
+export const HOSTING_ENV = getEnv('HOSTING_ENV');
